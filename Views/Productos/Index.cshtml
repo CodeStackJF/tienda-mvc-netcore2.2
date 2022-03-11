@@ -1,0 +1,27 @@
+<partial name="~/Views/Productos/_Form.cshtml">
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Categoría</th>
+            <th colspan="2">Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Productos Producto in ViewBag.Productos)
+        {
+            <tr>
+                <td>@Producto.Nombre</td>
+                <td>@Producto.Descripcion</td>
+                <td>@Producto.Marca</td>
+                <td>@Producto.Modelo</td>
+                <td>@Producto.Categoria.Categoria</td>
+                <td><a asp-action="Modificar" asp-controller="Productos" asp-route-id="@Producto.IdProducto">Modificar</a></td>
+                <td><a asp-action="Eliminar" asp-controller="Productos" asp-route-id="@Producto.IdProducto">Eliminar</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

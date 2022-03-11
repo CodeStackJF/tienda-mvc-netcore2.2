@@ -1,0 +1,40 @@
+@model Productos
+<form asp-action="SetProducto" asp-controller="Productos" method="post">
+    <input type="hidden" asp-for="IdProducto">
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label>Nombre</label>
+            <input type="text" asp-for="Nombre" class="form-control">
+            <span asp-validation-for="Nombre"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label>Descripción</label>
+            <textarea class="form-control" asp-for="Descripcion"></textarea>
+            <span asp-validation-for="Descripcion"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col">
+            <label>Marca</label>
+            <input type="text" class="form-control" asp-for="Marca">
+            <span asp-validation-for="Marca"></span>
+        </div>
+        <div class="form-group col">
+            <label>Modelo</label>
+            <input type="text" class="form-control" asp-for="Modelo">
+            <span asp-validation-for="Modelo"></span>
+        </div>
+        <div class="form-group col">
+            <label>Categoria</label>
+            <select asp-for="IdCategoria" class="form-control" asp-items="@(new SelectList(ViewBag.Categorias, "IdCategoria", "Categoria"))">
+                <option>Seleccione</option>
+            </select>
+            <span asp-validation-for="IdCategoria"></span>
+        </div>
+    </div>
+    <div class="row">
+        <button type="submit" class="btn btn-primary btn-flat">GUARDAR</submit>
+    </div>
+</form>

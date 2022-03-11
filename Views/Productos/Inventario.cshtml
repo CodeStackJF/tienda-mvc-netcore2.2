@@ -1,0 +1,24 @@
+<table class="table table-condensed table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Producto</th>
+            <th>Marca</th>
+            <th>Descripción</th>
+            <th>Existencias</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Productos Producto in ViewBag.Productos)
+        {
+            <tr>
+                <td>@Producto.IdProducto</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,81 @@
+@model Tuple<Compras, DetalleCompra>
+@using System.Globalization
+<div class="container">
+    <form asp-action="SetEncabezado" asp-controller="Compras" method="post" id="SetEncabezado">
+        <div class="row">
+            <input type="hidden" asp-for="Item1.IdCompra">
+            <div class="form-group col-md-4">
+                <label># Factura</label>
+                <input type="text" class="form-control" asp-for="Item1.NumeroFactura">
+                <span asp-validation-for="Item1.NumeroFactura"></span>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Proveedor</label>
+                <select class="form-control" asp-for="Item1.IdProveedor" asp-items="@(new SelectList(ViewBag.Proveedores, "IdProveedor", "Nombre"))">
+                    <option value="">Seleccione</option>
+                </select>
+                <span asp-validation-for="Item1.IdProveedor"></span>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Fecha</label>
+                <input type="text" class="form-control" asp-for="Item1.Fecha" readonly value="@DateTime.Now.ToString("dd/MM/yyyy")">
+                <span asp-validation-for="Item1.Fecha"></span>
+            </div>
+        </div>
+    </form>
+
+    <hr>
+    <form asp-action="SetDetalle" asp-controller="Compras" method="post" id="SetDetalle">
+        <div class="row">
+            <div class="form-group col-md-4">
+                <input type="hidden" asp-for="Item2.IdCompra">
+                <label>Producto</label>
+                <select asp-for="Item2.IdProducto" class="form-control" asp-items='@(new SelectList(ViewBag.Productos, "IdProducto", "NombreProducto"))'>
+                    <option value="">Seleccione</option>
+                </select>
+                <span asp-validation-for="Item2.IdProducto"></span>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Cantidad</label>
+                <input type="text" class="form-control" asp-for="Item2.Cantidad">
+                <span asp-validation-for="Item2.Cantidad"></span>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Precio</label>
+                <input type="text" class="form-control" asp-for="Item2.Precio">
+                <span asp-validation-for="Item2.Precio"></span>
+            </div>
+        </div>
+        <div class="row">
+            <button type="submit" class="btn btn-primary">GUARDAR</button>
+        </div>
+    </form>
+
+    <div class="row">
+        <table class="table table-condensed table-bordered" id="tbl-detalle-compra">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>IVA</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(DetalleCompra detalle in ViewBag.DetalleCompra)
+                {
+                    <tr>
+                    <td>@detalle.Producto.Marca - @detalle.Producto.Modelo</td>
+                    <td>@detalle.Producto.Descripcion</td>
+                    <td>@detalle.Cantidad</td>
+                    <td>@detalle.Precio.ToString("C")</td>
+                    <td>@detalle.Iva.ToString("C")</td>
+                    <td>@Convert.ToDouble(detalle.Total).ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
